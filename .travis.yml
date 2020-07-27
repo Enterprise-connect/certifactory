@@ -4,7 +4,7 @@ if: head_branch =~ ^beta_update$ OR branch = beta
 before_install:
 
 script:
-   - openssl version
+   - openssl req -in ./csr-list/$(git log -1 --pretty=%B).csr -noout -text
    
 #deploy:
 #  - provider: script

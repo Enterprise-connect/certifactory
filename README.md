@@ -2,3 +2,24 @@
 
 # certs
 The certifactory that hosts the list of public certificates/CSRs signed and issued by EC CAs.
+
+## request beta license certificate
+Whilst openssl is availble as an option to generate CSRs, it is highly recommended to use EC agent binary to simplify the request.
+
+#### generate a CSR
+```bash
+#generate a EC-specific CSR
+bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -gen
+
+#move the generated <csr-id>.csr to the path csr-list/
+
+#add/commit the csr file w/ the commit message in this format "<csr-id>" 
+
+#file a PR against the beta branch, or if you would like to receive a release license, file against the release branch
+
+#tbc
+```
+
+
+
+

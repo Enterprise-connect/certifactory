@@ -1,0 +1,23 @@
+language: minimal
+if: head_branch =~ ^beta_update$ OR branch = beta
+  
+before_install:
+
+script:
+   - openssl version
+   
+#deploy:
+#  - provider: script
+#    skip_cleanup: true
+#    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push enterpriseconnect/agent:v1
+#    on:
+#      branch: v1_oci_spec
+
+#after_deploy: docker rmi enterpriseconnect/agent:v1 -f && docker run -it enterpriseconnect/agent:v1 ./agent -ver
+
+notifications:  
+  email:  
+    recipients:  
+    - ec-research@ge.com
+    on_success: always  
+    on_failure: always

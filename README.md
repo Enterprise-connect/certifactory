@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/Enterprise-connect/certs.svg?branch=beta)](https://travis-ci.com/Enterprise-connect/certs)
 
-# certs
+# about this repo
 The certifactory that hosts the list of public x509 certificates/CSRs signed and issued by EC CAs.
 
 ## request beta license certificate

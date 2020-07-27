@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/Enterprise-connect/certs.svg?branch=beta)](https://travis-ci.com/Enterprise-connect/certs)
 
 # certs
-The certifactory that hosts the list of public certificates/CSRs signed and issued by EC CAs.
+The certifactory that hosts the list of public x509 certificates/CSRs signed and issued by EC CAs.
 
 ## request beta license certificate
 Whilst openssl is availble as an option to generate CSRs, it is highly recommended to use EC agent binary to simplify the request.
@@ -19,6 +19,9 @@ bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -gen
 
 #tbc
 ```
+
+#### get the certificate
+Your signed license certificate will be published in the folder ```cert-list/``` you should receive a ```<cert-id>```, and a URL to the certificate via email.
 
 
 

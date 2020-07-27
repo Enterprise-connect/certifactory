@@ -4,7 +4,7 @@
 The certifactory that hosts the list of public x509 certificates/CSRs signed and issued by EC CAs.
 
 ## request beta license certificate
-Whilst openssl is availble as an option to generate CSRs, it is highly recommended to use EC agent binary to simplify the request.
+Whilst openssl is availble as an option to generate CSRs, it is highly recommended to follow the steps below to simplify the request.
 
 #### generate a CSR
 ```bash

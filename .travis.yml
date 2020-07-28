@@ -4,8 +4,7 @@ if: head_branch =~ ^beta_update$ OR branch = beta
 before_install:
 
 script:
-  - git log -1 --pretty=%B
-  #- openssl req -in ./csr-list/$(git log -1 --pretty=%B).csr -noout -text   
+  - export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text   
 #deploy:
 #  - provider: script
 #    skip_cleanup: true

@@ -5,6 +5,7 @@ before_install:
 
 script:
   #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
+  - git log
   - COMMIT_ID=$(git rev-parse @~) && echo ${COMMIT_ID} && git log --format=%B -n 1 ${COMMIT_ID}
   
 #deploy:

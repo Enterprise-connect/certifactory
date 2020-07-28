@@ -12,6 +12,8 @@ script:
     bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -sgn <<MSG
     hello
     world
+    test
+    stdin
     MSG
 #deploy:
 #  - provider: script

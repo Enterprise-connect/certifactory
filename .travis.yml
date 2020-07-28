@@ -18,7 +18,8 @@ script:
 
 #after_deploy: docker rmi enterpriseconnect/agent:v1 -f && docker run -it enterpriseconnect/agent:v1 ./agent -ver
 
-notifications:  
+notifications:
+  slack: enterprisecon-j2w6229:XE0ViHsIgL4oQ27464Hq01hO:general
   email:  
     recipients:  
     - ec-research@ge.com

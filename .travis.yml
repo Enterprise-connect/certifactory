@@ -6,7 +6,8 @@ before_install:
 script:
   #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
   - export CSR_FILE=$(git log --all --format=%B --grep='.csr' -n 1)
-  - openssl req -in ./csr-list/${CSR_FILE} -noout -text
+  - openssl req -in ./csr-list/${CSR_FILE} -noout -subject
+  - openssl req -in ./csr-list/${CSR_FILE} -noout -text | grep -Po '(?<=email:).*?(, )'
   
 #deploy:
 #  - provider: script

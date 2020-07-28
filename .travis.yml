@@ -4,7 +4,9 @@ if: head_branch =~ ^beta_update$ OR branch = beta
 before_install:
 
 script:
-   - openssl version
+  #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
+  - git log && git branch
+  - CSR_COMMIT_ID=$(git rev-parse @^0~1) && echo ${CSR_COMMIT_ID} && git log --format=%B -n 1 ${CSR_COMMIT_ID}
    
 #deploy:
 #  - provider: script

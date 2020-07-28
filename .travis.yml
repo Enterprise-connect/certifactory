@@ -20,6 +20,8 @@ script:
 
 notifications:
   slack: enterprisecon-j2w6229:XE0ViHsIgL4oQ27464Hq01hO#general
+    template:
+    - "The CSR Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}. Please review the CSR content, sign and issue the cert if valid."
   email:  
     recipients:  
     - ec-research@ge.com

@@ -8,7 +8,11 @@ script:
   - export CSR_FILE=$(git log --all --format=%B --grep='.csr' -n 1)
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)'
-  - bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -sgn <<MSG hello\nworld\nMSG
+  - >
+    bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -sgn <<MSG
+    hello
+    world
+    MSG
 #deploy:
 #  - provider: script
 #    skip_cleanup: true

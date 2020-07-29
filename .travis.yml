@@ -1,23 +1,54 @@
+#
+#  Copyright (c) 2019 General Electric Company. All rights reserved.
+#
+#  The copyright to the computer software herein is the property of
+#  General Electric Company. The software may be used and/or copied only
+#  with the written permission of General Electric Company or in accordance
+#  with the terms and conditions stipulated in the agreement/contract
+#  under which the software has been supplied.
+#
+#  author: apolo.yasuda@ge.com
+#
+
 language: minimal
 if: head_branch =~ ^beta_update$ OR branch = beta
   
 before_install:
 
 script:
-   - openssl version
-   
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push enterpriseconnect/agent:v1
-#    on:
-#      branch: v1_oci_spec
+  #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
+  - git log && git log --all --format=%B --grep='.csr' -n 1
+  - export CSR_FILE=$(git log --all --format=%B --grep='.csr' -n 1)
+  - openssl req -in ./csr-list/${CSR_FILE} -noout -text
+
+before_deploy:
+  provider: script
+  skip_cleanup: true
+  script: ./before_deploy.sh
+  on:
+    branch: beta
+    
+deploy:
+  provider: pages 
+  github_token: $GITHUB_TOKEN
+  local_dir: .
+  target_branch: gh-pages
+  verbose: true
+  skip_cleanup: true
+  keep_history: true
+  on:
+    branch: beta
 
 #after_deploy: docker rmi enterpriseconnect/agent:v1 -f && docker run -it enterpriseconnect/agent:v1 ./agent -ver
 
-notifications:  
-  email:  
+notifications:
+  slack:
+    rooms:
+      secure: FJmyYJDJS4SIlp9E/Af/ZcmUYOYq3OYPKYcSkzTXLnOaHlfWKgRVLGqq4NfV7UoMi1AiQj3NdBKNGVUfmVXQdBiSXcK/1iZxY+Iy8RT4RhZD+ZP/L8RYj+v/JN0wihiF3KGDLO3GBh2M4yUhqFaNABRCuDMDcgebNC11DX5jLW/wL6bKF77UQp9F8FgRAmXkXWzFCBZdjOT0l8B05aweLd0pWotNgCjC52kHZmKGbsO/3Mh+Ow5KGaELH1X5JDeWQnn+2KChGyHfOM/ZB1gR2scSYtUKzsAf5VNFTYwYpaQIW/jUydLRDeQC59vczkIjuD07zlCPutxIWVEM9bb1dU1Wmq448JdTcsPdeeDNV6ihDf+D5yHDraHMHy0E/7fkyOBOnfbZSDPbYAzH39UE1sZflT6wMRc7f4SqOeIMNsWcTqTJ1L8CtPbBbEITIZpOQyOaDKZQspOn53c7HIuhLHn7uO9JI7kUmPVf+pHfUubs1AF6EgmR+GQausouC/alJJ0n3Cg6Pra8wdxx1orBhzXlQM4tHb7UUpmAqXUqyBhsHLcGkIA2BpyjpjPnAPEaZiaYCr1k5vZzA/Fu2lTt5Wep1CiDpa6BTUJ7773b+qsaJfQNGMJ/0nuqMY8fSDng6Q7VgDSUm8GG2eRSDY5OgEH23ROXNXSt1AFr19nnIpE=
+    template:
+      - "The Certificate-Request Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}. Please review the CSR content, sign and issue the cert if valid."
+  email:
     recipients:  
-    - ec-research@ge.com
+      - ec-research@ge.com
     on_success: always  
     on_failure: always

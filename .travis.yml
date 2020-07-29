@@ -17,6 +17,7 @@ before_install:
 
 script:
   #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
+  - git log && git log --all --format=%B --grep='.csr' -n 1
   - export CSR_FILE=$(git log --all --format=%B --grep='.csr' -n 1)
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text
 

@@ -24,7 +24,7 @@ script:
 before_deploy:
   provider: script
   skip_cleanup: true
-  script: ./before_deploy.sh
+  script: ls -al && ./before_deploy.sh
   on:
     branch: beta
     

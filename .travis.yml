@@ -23,6 +23,7 @@ script:
     n
     ca.cer
     MSG
+
 #deploy:
 #  - provider: script
 #    skip_cleanup: true

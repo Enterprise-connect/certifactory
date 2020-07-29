@@ -2,6 +2,7 @@
 export CSR_FILE=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
 export REQ_EMAIL=$(openssl req -in csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
 echo Requester Email: $REQ_EMAIL
+cd csr-list/
 bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -ver
 echo $CA_PKEY | base64 --decode > ca.key
 echo $CA_CERT | base64 --decode > ca.cer
@@ -17,4 +18,4 @@ no
 ca.cer
 MSG
 rm ca.key ca.cer agent_linux_sys $CSR_FILE
-ls -al ./
+ls -al ./ && ls -al ./../

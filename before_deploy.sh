@@ -13,7 +13,7 @@ ca.key
 DEVELOPER
 EC_ECO
 Seat_x1
-csr-list/$CSR_FILE
+$CSR_FILE
 no
 ca.cer
 MSG

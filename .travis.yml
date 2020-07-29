@@ -12,7 +12,7 @@ script:
   - echo $CA_PKEY | base64 --decode > ca.key
   - echo $CA_CERT | base64 --decode > ca.cer
   - export EC_PPS=$(./agent_linux_sys -hsh -dat $CA_PPRS)
-  - >
+  - |
     ./agent_linux_sys -sgn <<MSG
     ca.key
     365

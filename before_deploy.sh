@@ -1,5 +1,4 @@
 #!/bin/bash
-cd csr-list/
 export CSR_FILE=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
 export REQ_EMAIL=$(openssl req -in csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
 echo Requester Email: $REQ_EMAIL

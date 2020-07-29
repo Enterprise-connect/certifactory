@@ -19,7 +19,7 @@ script:
     DEVELOPER
     EC_ECO
     Seat_x1
-    ./csr-list/${CSR_FILE}
+    ./csr-list/$CSR_FILE
     n
     ca.cer
     MSG

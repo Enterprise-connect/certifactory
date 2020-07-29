@@ -7,29 +7,43 @@ script:
   #- export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
   - export CSR_FILE=$(git log --all --format=%B --grep='.csr' -n 1)
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text
-  - openssl req -in ./csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)'
-  - bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -ver
-  - echo $CA_PKEY | base64 --decode > ca.key
-  - echo $CA_CERT | base64 --decode > ca.cer
-  - export EC_PPS=$(./agent_linux_sys -hsh -dat $CA_PPRS)
-  - |
+
+before_deploy:
+  provider: script
+  skip_cleanup: true
+  script: |
+    export REQ_EMAIL=$(openssl req -in ./csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
+    echo Requester Email: $REQ_EMAIL
+    cd cert-list/
+    bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -ver
+    echo $CA_PKEY | base64 --decode > ca.key
+    echo $CA_CERT | base64 --decode > ca.cer
+    export EC_PPS=$(./agent_linux_sys -hsh -dat $CA_PPRS)
     ./agent_linux_sys -sgn <<MSG
     ca.key
     365
     DEVELOPER
     EC_ECO
     Seat_x1
-    ./csr-list/$CSR_FILE
+    ./../csr-list/$CSR_FILE
     n
     ca.cer
     MSG
-
-#deploy:
-#  - provider: script
-#    skip_cleanup: true
-#    script: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && docker push enterpriseconnect/agent:v1
-#    on:
-#      branch: v1_oci_spec
+    rm ca.key ca.cer agent_linux_sys ./../csr-list/$CSR_FILE
+    ls -al ./
+  on:
+    branch: beta
+    
+deploy:
+  provider: pages 
+  github_token: $GITHUB_TOKEN
+  local_dir: .
+  target_branch: gh-pages
+  verbose: true
+  skip_cleanup: true
+  keep_history: true
+  on:
+    branch: beta
 
 #after_deploy: docker rmi enterpriseconnect/agent:v1 -f && docker run -it enterpriseconnect/agent:v1 ./agent -ver
 

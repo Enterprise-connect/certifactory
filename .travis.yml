@@ -9,13 +9,19 @@ script:
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text
   - openssl req -in ./csr-list/${CSR_FILE} -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)'
   - bash <(curl -s https://enterprise-connect.github.io/oci/k8s/conf.txt) -ver
-  - export EC_PPS=$(./agent_linux_sys -hsh -dat $BETA_PPS)
+  - echo $CA_PKEY | base64 --decode > ca.key
+  - echo $CA_CERT | base64 --decode > ca.cer
+  - export EC_PPS=$(./agent_linux_sys -hsh -dat $CA_PPRS)
   - >
     ./agent_linux_sys -sgn <<MSG
-    hello
-    world
-    test
-    stdin
+    ca.key
+    365
+    DEVELOPER
+    EC_ECO
+    Seat_x1
+    ./csr-list/${CSR_FILE}
+    n
+    ca.cer
     MSG
 #deploy:
 #  - provider: script

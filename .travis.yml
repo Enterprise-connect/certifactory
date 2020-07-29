@@ -21,7 +21,7 @@ script:
   - export CSR_FILE=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
   - openssl req -in csr-list/${CSR_FILE} -noout -text
 
-before_deploy: ./before_deploy.sh
+before_deploy: chmod 775 before_deploy.sh && ./before_deploy.sh
     
 deploy:
   provider: pages 

@@ -21,12 +21,7 @@ script:
   - export CSR_FILE=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
   - openssl req -in csr-list/${CSR_FILE} -noout -text
 
-before_deploy:
-  provider: script
-  skip_cleanup: true
-  script: ls -al && ./before_deploy.sh
-  on:
-    branch: beta
+before_deploy: ./before_deploy.sh
     
 deploy:
   provider: pages 

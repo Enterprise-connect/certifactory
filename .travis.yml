@@ -30,7 +30,7 @@ deploy:
   target_branch: gh-pages
   verbose: true
   skip_cleanup: true
-  keep_history: true
+  keep_history: false
   on:
     branch: beta
 

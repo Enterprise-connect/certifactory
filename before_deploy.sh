@@ -6,8 +6,8 @@ cd cert-list/beta/
 source <(wget -O - https://enterprise-connect.github.io/sdk/scripts/agt/v1.1beta.linux64.txt) -ver
 echo $CA_PKEY | base64 --decode > ca.key
 echo $CA_CERT | base64 --decode > ca.cer
-export EC_PPS=$(./agent_linux_sys -hsh -dat $CA_PPRS)
-./agent_linux_sys -sgn <<MSG
+export EC_PPS=$(agent -hsh -dat $CA_PPRS)
+agent -sgn <<MSG
 ca.key
 365
 DEVELOPER
@@ -17,6 +17,6 @@ Seat_x1
 no 
 ca.cer
 MSG
-rm ca.key ca.cer agent_linux_sys
+rm ca.key ca.cer
 ls -al ./ && ls -al ./../..
 cd -

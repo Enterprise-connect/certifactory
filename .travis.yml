@@ -29,7 +29,7 @@ deploy:
   provider: pages 
   github_token: $GITHUB_TOKEN
   local_dir: .
-  target_branch: gh-pages
+  target_branch: disty
   verbose: true
   skip_cleanup: true
   keep_history: true

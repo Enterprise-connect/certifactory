@@ -13,8 +13,6 @@
 
 #export CSRID='git log --format=%B -n 1 $(git rev-parse @~)' && openssl req -in ./csr-list/${CSRID}.csr -noout -text
 #git log && git log --all --format=%B --grep='.csr' -n 1
-git log
-git log --format=%B --no-merges -n 1 | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
 export CSR_ID=$(git log --format=%B --no-merges -n 1 | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
 if [ -z "$CSR_ID" ]; then
     echo ******** invalid csrid: $CSR_ID 

@@ -27,7 +27,7 @@ add/commit/push the file to your working branch.
 File a PR against the original ```beta``` branch, if this is for a beta-relate certificate. Otherwise please PR against the ```release``` branch.
 
 ### step 6. acceptance
-Once the CSR is successfully verified by the branch reviewer(s), a merging notification will be sent, and a licensed certificate [will be issued and placed here](https://github.com/Enterprise-connect/certifactory/tree/gh-pages/cert-list).
+Once the CSR is successfully verified by the branch reviewer(s), a merging notification will be sent, and a licensed certificate [will be issued and placed here](https://github.com/EC-Release/certifactory/tree/disty/cert-list).
 
 
 

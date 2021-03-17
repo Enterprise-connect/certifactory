@@ -5,11 +5,33 @@ on:
       Common:
         description: 'Describe the Common Name of the certificate request. E.g. "A Test Digital Certificate"'
         required: true
-        default: ''
-      State:
-        description: 'Your Country. E.g. "US"'
+      Country:
+        description: 'Country. E.g. "US"'
         required: true
-        default: ''
+      State:
+        description: 'State/Province. E.g. "Florida"'
+        required: true
+      City:
+        description: 'Locality/City. E.g. "Orlando"'
+        required: true
+      Zip:
+        description: 'Zip/PostalCode. E.g. "32819"'
+        required: true
+      Address:
+        description: 'Street Address. E.g. "6000 Universal Blvd"'
+        required: true
+      Organization:
+        description: 'Organization. E.g. "Amagle Barber"'
+        required: true
+      Unit:
+        description: 'Organizational unit. E.g. "Digit Div. of Amagle Barber"'
+        required: true
+      DNS:
+        description: 'DNS name of the cert. E.g. "yourdomain.<org,edu,com>". Hint: TLS usage will conform to/validate this name'
+        required: true
+      Email:
+        description: 'Contact email associates with the cert'
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest

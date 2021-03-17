@@ -5,16 +5,6 @@ on:
   pull_request:
     branches: [ beta ]
     types: [opened, synchronize]
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Describe the Common Name of the certificate request. E.g. "A Test Digital Certificate"'
-        required: true
-        default: ''
-      home:
-        description: 'Your Country. E.g. "US"'
-        required: true
-        default: ''
 jobs:
   build:
     runs-on: ubuntu-latest

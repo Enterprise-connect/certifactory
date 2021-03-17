@@ -46,11 +46,9 @@ jobs:
         id: gen-license-req
         #env:
         run: |
-          chmod 775 ./script.sh ./before_deploy.sh
-          source ./script.sh
-          source ./before_deploy.sh
+          chmod 775 ./cert-gen.sh
+          source ./cert-gen.sh
       - name: pr-license-req
-        if: github.event_name == 'push'
         id: pr-merged
         run: |
-          chmod 775 deploy.sh && source ./deploy.sh
+          echo create license PR for sign-off.

@@ -12,3 +12,23 @@
 #
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
+
+if [[ ! -z "${EC_PPS}" ]]; then
+  export EC_PPS=$(agent -hsh -smp)
+fi
+
+agent -sgn <<MSG
+${lic-common}
+${lic-country}
+${lic-state}
+${lic-city}
+${lic-zip}
+${lic-address}
+${lic-organization}
+${lic-unit}
+${lic-dns}
+${lic-email}
+${lic-cer-alg}
+${lic-key-alg}
+no
+MSG

@@ -19,7 +19,7 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 if [[ -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
-
+printf "\n**** pps0: %s\n" "$EC_PPS"
 EC_PPS=$(agent -hsh -smp -dbg)
 printf "\n**** pps1: %s\n" "$EC_PPS"
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg)
@@ -41,4 +41,4 @@ ${lic_email}
 ${lic_cer_alg}
 ${lic_key_alg}
 no
-MSG'
+MSG

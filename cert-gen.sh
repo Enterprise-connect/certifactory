@@ -16,27 +16,13 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 #printf "\n**** EC_PVK: %s\n\n**** EC_PBK: %s" "$(echo $EC_PVK|base64 --decode)" "$(echo $EC_PBK|base64 --decode)"
 #printf "\n**** pps: %s\n" "$EC_PPS" 
 
-#{
-  printf "\n ******* is big endian *******\n"
-  echo -n I | od -to2 | head -n1 | cut -f2 -d" " | cut -c6 
-  printf "\n *****************************\n"
-  date -u
-  
-  agent -hsh -smp -dbg
-  #agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
-#} || {
-  date -u
-  ls -al ~/.ec/
-  ls -Art ~/.ec/*.log | tail -n 1
-  cat $(ls -Art ~/.ec/*.log | tail -n 1)
-  #ls -lt ~/.ec/*.log | tail -1
-  #cat $(ls -lt ~/.ec/*.log | tail -1)
-#}
+if [[ -z "$EC_PPRS" ]]; then
+  export EC_PPS="$EC_PPRS"
+fi
 
-: 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)
-printf "\n*** convert pps\n"
+EC_PPS=$(agent -hsh -smp -dbg)
+agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
-printf "\n*** got final pps\n"
 agent -sgn <<MSG
 ${lic_common}
 ${lic_country}

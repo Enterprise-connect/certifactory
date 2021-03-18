@@ -17,6 +17,11 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 #printf "\n**** pps: %s\n" "$EC_PPS" 
 
 #{
+  printf "\n ******* is big endian *******\n"
+  echo -n I | od -to2 | head -n1 | cut -f2 -d" " | cut -c6 
+  printf "\n *****************************\n"
+  date -u
+  
   agent -hsh -smp -dbg
   #agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 #} || {

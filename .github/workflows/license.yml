@@ -41,19 +41,19 @@ jobs:
       - name: Generate licensing request
         id: gen-license-req
         env:
-          lic-common: ${{ github.event.inputs.Common }}
-          lic-country: ${{ github.event.inputs.Country }}
-          lic-state: ${{ github.event.inputs.State }}
-          lic-city: ${{ github.event.inputs.City }}
-          lic-zip: ${{ github.event.inputs.Zip }}
-          lic-address: ${{ github.event.inputs.Address }}
-          lic-organization: Enterprise-Connect
-          lic-unit: Licensing
-          lic-dns: ${{ github.event.inputs.DNS }}
-          lic-email: ${{ github.event.inputs.Email }}
-          lic-cer-alg: SHA256WithRSA
-          lic-key-alg: 2048
-          lic-pps: ${{ github.event.inputs.PPS }}
+          lic_common: ${{ github.event.inputs.Common }}
+          lic_country: ${{ github.event.inputs.Country }}
+          lic_state: ${{ github.event.inputs.State }}
+          lic_city: ${{ github.event.inputs.City }}
+          lic_zip: ${{ github.event.inputs.Zip }}
+          lic_address: ${{ github.event.inputs.Address }}
+          lic_organization: Enterprise-Connect
+          lic_unit: Licensing
+          lic_dns: ${{ github.event.inputs.DNS }}
+          lic_email: ${{ github.event.inputs.Email }}
+          lic_cer_alg: SHA256WithRSA
+          lic_key_alg: 2048
+          lic_pps: ${{ github.event.inputs.PPS }}
           EC_PPS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_PVK }}
           EC_PBK: ${{ secrets.ADM_PBK }}

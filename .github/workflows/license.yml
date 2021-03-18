@@ -55,7 +55,7 @@ jobs:
           lic_cer_alg: SHA256WithRSA
           lic_key_alg: 2048
           lic_pps: ${{ github.event.inputs.PPS }}
-          EC_PPS: ${{ secrets.ADM_PPS }}
+          EC_PPS_ADM: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
         run: |

@@ -13,10 +13,9 @@
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
-if [[ ! -z "${EC_PPS}" ]]; then
-  export EC_PPS=$(agent -hsh -smp)
-fi
-
+EC_PPS=$(agent -hsh -smp)
+EC_LIC_PPS=$(agent -hsh -pvk ${EC_PVK} -pbk ${EC_PBK} -dat ${lic-pps})
+EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
 agent -sgn <<MSG
 ${lic-common}
 ${lic-country}

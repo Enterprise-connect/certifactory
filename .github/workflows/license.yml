@@ -55,8 +55,8 @@ jobs:
           lic_key_alg: 2048
           lic_pps: ${{ github.event.inputs.PPS }}
           EC_PPS: ${{ secrets.ADM_PPS }}
-          EC_PVK: ${{ secrets.ADM_PVK }}
-          EC_PBK: ${{ secrets.ADM_PBK }}
+          EC_PVK: ${{ secrets.ADM_KEY }}
+          EC_PBK: ${{ secrets.ADM_CER }}
         run: |
           chmod 775 ./cert-gen.sh
           source ./cert-gen.sh

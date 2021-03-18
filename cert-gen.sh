@@ -14,8 +14,7 @@
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
 EC_PPS=$(agent -hsh -smp)
-printf "\n*** refresh pps\n"
-EC_LIC_PPS=$(agent -hsh -pvk $(echo $EC_PVK|base64 -w0) -pbk $(echo $EC_PBK|base64 -w0) -dat ${lic-pps})
+EC_LIC_PPS=$(agent -hsh -pvk $(echo $EC_PVK|base64 -w0) -pbk $(echo $EC_PBK|base64 -w0) -dat $lic-pps -smp)
 printf "\n*** convert pps\n"
 EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
 printf "\n*** got final pps\n"

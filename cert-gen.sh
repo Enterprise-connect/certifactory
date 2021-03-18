@@ -14,7 +14,8 @@
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
 EC_PPS=$(agent -hsh -smp)
-EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)
+agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp
+: 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)
 printf "\n*** convert pps\n"
 EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
 printf "\n*** got final pps\n"
@@ -32,4 +33,4 @@ ${lic_email}
 ${lic_cer_alg}
 ${lic_key_alg}
 no
-MSG
+MSG'

@@ -32,6 +32,9 @@ on:
       Email:
         description: 'Contact email associates with the cert'
         required: true
+      PPS:
+        description: 'A passphrase in plaintext'
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -55,6 +58,12 @@ jobs:
           lic-unit: ${{ github.event.inputs.Unit }}
           lic-dns: ${{ github.event.inputs.DNS }}
           lic-email: ${{ github.event.inputs.Email }}
+          lic-cer-alg: SHA256WithRSA
+          lic-key-alg: 2048
+          lic-pps: ${{ github.event.inputs.PPS }}
+          EC_PPS: ${{ secrets.ADM_PPS }}
+          EC_PVK: ${{ secrets.ADM_PVK }}
+          EC_PBK: ${{ secrets.ADM_PBK }}
         run: |
           chmod 775 ./cert-gen.sh
           source ./cert-gen.sh

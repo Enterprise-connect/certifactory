@@ -15,7 +15,7 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 
 export EC_PPS=$(agent -hsh -smp)
 #printf "\n**** EC_PVK: %s\n\n**** EC_PBK: %s" "$(echo $EC_PVK|base64 --decode)" "$(echo $EC_PBK|base64 --decode)"
-agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp
+EC_PPS="$EC_PPS" agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp
 : 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)
 printf "\n*** convert pps\n"
 EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")

@@ -21,7 +21,7 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
   agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 } || {
   date -u
-  cat $(ls  ~/.ec/agt.*)
+  cat $(ls -Art ~/.ec/agt.* | tail -n 1)
 }
 
 : 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)

@@ -20,7 +20,7 @@ printf "\n**** pps: %s\n" "$EC_PPS"
 {
   agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 } || {
-  ls -la ~/.ec/
+  cat $(ls  ~/.ec/agt*)
 }
 
 : 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)

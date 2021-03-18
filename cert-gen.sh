@@ -25,7 +25,7 @@ EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 printf "\n**** pps3: %s\n" "$EC_PPS"
 
-agent -sgn <<MSG
+agent -gen <<MSG
 ${lic_common}
 ${lic_country}
 ${lic_state}

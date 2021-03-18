@@ -21,9 +21,12 @@ if [[ -z "${EC_PPRS}" ]]; then
 fi
 
 EC_PPS=$(agent -hsh -smp -dbg)
+printf "\n**** pps1: %s\n" "$EC_PPS"
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg)
+printf "\n**** pps2: %s\n" "$EC_PPS"
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
-printf "\n**** pps: %s\n" "$EC_PPS" 
+printf "\n**** pps3: %s\n" "$EC_PPS"
+
 agent -sgn <<MSG
 ${lic_common}
 ${lic_country}

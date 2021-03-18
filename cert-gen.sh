@@ -14,22 +14,22 @@
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
 EC_PPS=$(agent -hsh -smp)
-EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic-pps -smp)
+EC_LIC_PPS=$(agent -hsh -pvk ${EC_PVK} -pbk ${EC_PBK} -dat ${lic_pps} -smp)
 printf "\n*** convert pps\n"
 EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
 printf "\n*** got final pps\n"
 agent -sgn <<MSG
-${lic-common}
-${lic-country}
-${lic-state}
-${lic-city}
-${lic-zip}
-${lic-address}
-${lic-organization}
-${lic-unit}
-${lic-dns}
-${lic-email}
-${lic-cer-alg}
-${lic-key-alg}
+${lic_common}
+${lic_country}
+${lic_state}
+${lic_city}
+${lic_zip}
+${lic_address}
+${lic_organization}
+${lic_unit}
+${lic_dns}
+${lic_email}
+${lic_cer_alg}
+${lic_key_alg}
 no
 MSG

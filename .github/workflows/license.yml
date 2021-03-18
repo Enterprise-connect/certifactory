@@ -27,7 +27,7 @@ on:
         description: 'Contact email associates with the cert'
         required: true
       PPS:
-        description: 'A passphrase in plaintext'
+        description: 'Passphrase in plaintext'
         required: true
 jobs:
   build:

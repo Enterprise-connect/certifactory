@@ -16,13 +16,14 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 #printf "\n**** EC_PVK: %s\n\n**** EC_PBK: %s" "$(echo $EC_PVK|base64 --decode)" "$(echo $EC_PBK|base64 --decode)"
 #printf "\n**** pps: %s\n" "$EC_PPS" 
 
-if [[ -z "$EC_PPRS" ]]; then
-  export EC_PPS="$EC_PPRS"
+if [[ -z "${EC_PPRS}" ]]; then
+  export EC_PPS=$EC_PPRS
 fi
 
 EC_PPS=$(agent -hsh -smp -dbg)
-agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
-EC_PPS=$(echo "${EC_LIC_PPS##*$'\n'}")
+EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg)
+EC_PPS=$(echo "${EC_PPS##*$'\n'}")
+printf "\n**** pps: %s\n" "$EC_PPS" 
 agent -sgn <<MSG
 ${lic_common}
 ${lic_country}

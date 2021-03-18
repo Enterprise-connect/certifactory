@@ -17,12 +17,15 @@ source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/script
 #printf "\n**** pps: %s\n" "$EC_PPS" 
 
 {
-  export EC_PPS=$(agent -hsh -smp)
+  export EC_PPS=$(agent -hsh -smp -dbg)
   agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 } || {
   date -u
   ls -al ~/.ec/
+  ls -Art ~/.ec/*.log | tail -n 1
+  cat $(ls -Art ~/.ec/*.log | tail -n 1)
   ls -lt ~/.ec/*.log | tail -1
+  cat $(ls -lt ~/.ec/*.log | tail -1)
 }
 
 : 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)

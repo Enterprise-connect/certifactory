@@ -13,11 +13,11 @@
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
-export EC_PPS=$(agent -hsh -smp)
 #printf "\n**** EC_PVK: %s\n\n**** EC_PBK: %s" "$(echo $EC_PVK|base64 --decode)" "$(echo $EC_PBK|base64 --decode)"
 #printf "\n**** pps: %s\n" "$EC_PPS" 
 
 {
+  export EC_PPS=$(agent -hsh -smp)
   agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg
 } || {
   date -u

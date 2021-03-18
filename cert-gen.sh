@@ -14,6 +14,7 @@
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
 export EC_PPS=$(agent -hsh -smp)
+printf "\n*** ec_pps *** %s\n" $EC_PPS
 EC_PPS=$EC_PPS agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp
 : 'EC_LIC_PPS=$(agent -hsh -pvk $EC_PVK -pbk $EC_PBK -dat $lic_pps -smp)
 printf "\n*** convert pps\n"

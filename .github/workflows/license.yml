@@ -20,12 +20,6 @@ on:
       Address:
         description: 'Street Address. E.g. "6000 Universal Blvd"'
         required: true
-      Organization:
-        description: 'Organization. E.g. "Amagle Barber"'
-        required: true
-      Unit:
-        description: 'Organizational unit. E.g. "Digit Div. of Amagle Barber"'
-        required: true
       DNS:
         description: 'DNS name of the cert. E.g. "yourdomain.<org,edu,com>". Hint: TLS usage will conform to/validate this name'
         required: true
@@ -53,8 +47,8 @@ jobs:
           lic-city: ${{ github.event.inputs.City }}
           lic-zip: ${{ github.event.inputs.Zip }}
           lic-address: ${{ github.event.inputs.Address }}
-          lic-organization: ${{ github.event.inputs.Organization }}
-          lic-unit: ${{ github.event.inputs.Unit }}
+          lic-organization: Enterprise-Connect
+          lic-unit: Licensing
           lic-dns: ${{ github.event.inputs.DNS }}
           lic-email: ${{ github.event.inputs.Email }}
           lic-cer-alg: SHA256WithRSA

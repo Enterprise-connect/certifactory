@@ -40,3 +40,4 @@ no
 MSG
 
 ls -al
+echo "helloworld=yellow" >> $GITHUB_ENV

@@ -10,10 +10,10 @@ if [[ ! -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
 
-: 'echo $CA_PKEY | base64 --decode > ca.key
-echo $CA_CERT | base64 --decode > ca.cer
+echo $EC_PVK | base64 --decode > ca.key
+echo $EC_PBK | base64 --decode > ca.cer
 
-EC_PPS=$(agent -hsh -smp -dbg)
+EC_PPS=$(agent -hsh -smp)
 agent -sgn <<MSG
 ca.key
 365
@@ -26,4 +26,4 @@ ca.cer
 MSG
 rm ca.key ca.cer
 ls -al ./ && ls -al ./../..
-cd -'
+cd -

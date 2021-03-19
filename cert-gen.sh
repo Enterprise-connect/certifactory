@@ -13,17 +13,16 @@
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
-#printf "\n**** EC_PVK: %s\n\n**** EC_PBK: %s" "$(echo $EC_PVK|base64 --decode)" "$(echo $EC_PBK|base64 --decode)"
-#printf "\n**** pps: %s\n" "$EC_PPS" 
-
 if [[ ! -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
 
 EC_PPS=$(agent -hsh -smp -dbg)
-EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp -dbg)
+EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
+
 printf "\n**** pps3: %s\n" "$EC_PPS"
+EC_PPS=$(agent -hsh -smp -dbg)
 
 agent -gen <<MSG
 ${lic_common}

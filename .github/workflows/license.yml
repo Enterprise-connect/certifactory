@@ -1,0 +1,91 @@
+name: license-req
+on:
+  workflow_dispatch:
+    inputs:
+      Common:
+        description: 'Describe the Common Name of the certificate request. E.g. "A Test Digital Certificate"'
+        required: true
+      Country:
+        description: 'Country. E.g. "US"'
+        required: true
+      State:
+        description: 'State/Province. E.g. "Florida"'
+        required: true
+      City:
+        description: 'Locality/City. E.g. "Orlando"'
+        required: true
+      Zip:
+        description: 'Zip/PostalCode. E.g. "32819"'
+        required: true
+      Address:
+        description: 'Street Address. E.g. "6000 Universal Blvd"'
+        required: true
+      DNS:
+        description: 'DNS name of the cert. E.g. "yourdomain.<org,edu,com>". Hint: TLS usage will conform to/validate this name'
+        required: true
+      Email:
+        description: 'Contact email associates with the cert'
+        required: true
+      PPS:
+        description: 'Passphrase in plaintext'
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    environment: beta
+    env:
+      #AGENT_REV: "1.2-b.0.reiwa"
+      AGENT_REV: "temp"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate licensing request
+        id: gen-license-req
+        env:
+          lic_common: ${{ github.event.inputs.Common }}
+          lic_country: ${{ github.event.inputs.Country }}
+          lic_state: ${{ github.event.inputs.State }}
+          lic_city: ${{ github.event.inputs.City }}
+          lic_zip: ${{ github.event.inputs.Zip }}
+          lic_address: ${{ github.event.inputs.Address }}
+          lic_organization: Enterprise-Connect
+          lic_unit: Licensing
+          lic_dns: ${{ github.event.inputs.DNS }}
+          lic_email: ${{ github.event.inputs.Email }}
+          lic_cer_alg: SHA256WithRSA
+          lic_key_alg: 2048
+          lic_pps: ${{ github.event.inputs.PPS }}
+          EC_PPRS: ${{ secrets.ADM_PPS }}
+          EC_PVK: ${{ secrets.ADM_KEY }}
+          EC_PBK: ${{ secrets.ADM_CER }}
+        run: |
+          chmod 644 ./cert-gen.sh
+          source ./cert-gen.sh
+      - name: Create PR for the license
+        id: pr-merged
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.ADM_TKN }}
+          commit-message: ${{ env.EC_CSR_MSG_TITLE }}
+          committer: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
+          author: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
+          signoff: false
+          branch: beta-${{ env.EC_CSR_MSG_TITLE }}
+          delete-branch: true
+          title: License Request [${{ github.event.inputs.Common }}]
+          body: |
+            License Request from: ${{ github.event.inputs.Email }}
+            For: ${{ github.event.inputs.Common }}
+            
+            Pending for CA Issuer's review
+          labels: |
+            license
+            ca
+            certifactory
+          assignees: ayasuda-ge
+          reviewers: ayasuda-ge
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
+          draft: false

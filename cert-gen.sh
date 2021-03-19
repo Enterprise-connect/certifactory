@@ -39,5 +39,7 @@ ${lic_key_alg}
 no
 MSG
 
-op=$(printf "%s" $(ls *.key | xargs -n 1 basename))
-echo "helloworld=$op" >> $GITHUB_ENV
+op=$(printf "%s" $(ls *.csr | xargs -n 1 basename))
+echo "EC_CSR_MSG_TITLE=$op" >> $GITHUB_ENV
+
+rm *.csr *.key

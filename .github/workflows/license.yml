@@ -62,7 +62,7 @@ jobs:
           chmod 644 ./cert-gen.sh
           source ./cert-gen.sh
       - name: Create PR for the license
-        id: pr-merged
+        id: pr-license
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.ADM_TKN }}
@@ -89,3 +89,11 @@ jobs:
             maintainers
           milestone: 1
           draft: false
+      - name: Validate license req
+        id: validate-license
+        #env:
+        run: |
+          chmod 775 ./script.sh ./before_deploy.sh
+          source ./script.sh
+          source ./before_deploy.sh
+      

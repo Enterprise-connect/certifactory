@@ -21,7 +21,6 @@ EC_PPS=$(agent -hsh -smp -dbg)
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
-printf "\n**** pps3: %s\n" "$EC_PPS"
 EC_PPS=$(agent -hsh -smp -dbg)
 
 agent -gen <<MSG
@@ -38,4 +37,4 @@ ${lic_email}
 ${lic_cer_alg}
 ${lic_key_alg}
 no
-MSG'
+MSG

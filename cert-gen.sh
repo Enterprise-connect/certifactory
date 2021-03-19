@@ -42,5 +42,8 @@ MSG
 op=$(printf "%s" $(ls *.csr | xargs -n 1 basename))
 echo "EC_CSR_MSG_TITLE=$op" >> $GITHUB_ENV
 
+fn="${op%.*}"
+echo "EC_CSR_ID=$fn" >> $GITHUB_ENV
+
 mv *.csr ./csr-list/
 mv *.key ./key-list/

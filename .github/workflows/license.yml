@@ -71,8 +71,8 @@ jobs:
         with:
           token: ${{ secrets.ADM_TKN }}
           commit-message: ${{ env.EC_CSR_MSG_TITLE }}
-          committer: ${{ github.event.inputs.Email }}
-          author: ${{ github.event.inputs.Email }}
+          committer: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
+          author: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
           signoff: false
           branch: beta-${{ env.EC_CSR_MSG_TITLE }}
           delete-branch: true

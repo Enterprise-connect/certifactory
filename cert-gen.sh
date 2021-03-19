@@ -39,5 +39,5 @@ ${lic_key_alg}
 no
 MSG
 
-ls -al
-echo "helloworld=yellow" >> $GITHUB_ENV
+op=$(printf "%s" $(ls *.key | xargs -n 1 basename))
+echo "helloworld=$op" >> $GITHUB_ENV

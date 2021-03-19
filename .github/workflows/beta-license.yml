@@ -1,5 +1,7 @@
 name: license-req
 on:
+  push:
+    branches: [ beta ]
   workflow_dispatch:
     inputs:
       Common:
@@ -96,4 +98,8 @@ jobs:
           chmod 775 ./script.sh ./before_deploy.sh
           source ./script.sh
           source ./before_deploy.sh
-      
+      - name: Issue License
+        if: github.event_name == 'push'
+        id: issue-license
+        run: |
+          chmod 775 deploy.sh && source ./deploy.sh

@@ -28,4 +28,4 @@ if [ "$CSR_ID" != "$SN_NUM" ]; then
 fi
  
 echo ******** the serialnumber $SN_NUM matches the csrid $CSR_ID 
-openssl req -in csr-list/$CSR_ID.csr -noout -text'
+openssl req -in csr-list/$CSR_ID.csr -noout -text

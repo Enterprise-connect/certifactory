@@ -102,7 +102,9 @@ jobs:
         id: test-issue-license
         env:          
           EC_PPRS: ${{ secrets.ADM_PPS }}  
-          CSR_ID: ${{ env.EC_CSR_ID }}        
+          CSR_ID: ${{ env.EC_CSR_ID }}
+          EC_PVK: ${{ secrets.ADM_KEY }}
+          EC_PBK: ${{ secrets.ADM_CER }}
         run: | 
           chmod 775 ./before_deploy.sh
           source ./before_deploy.sh

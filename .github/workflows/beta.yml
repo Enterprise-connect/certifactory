@@ -15,13 +15,6 @@ jobs:
       AGENT_REV: "temp"
     steps:
       - uses: actions/checkout@v2
-      - name: bootstrap beta
-        id: bootstrap-beta
-        #env:
-        run: |
-          chmod 775 ./script.sh ./before_deploy.sh
-          source ./script.sh
-          source ./before_deploy.sh
       - name: pr merged
         if: github.event_name == 'push'
         id: pr-merged

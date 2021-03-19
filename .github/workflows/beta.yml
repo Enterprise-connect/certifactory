@@ -89,6 +89,8 @@ jobs:
           team-reviewers: |
             owners
             maintainers
+            research-development
+            solution
           milestone: 1
           draft: false
       - name: Validate license req

@@ -38,3 +38,5 @@ ${lic_cer_alg}
 ${lic_key_alg}
 no
 MSG
+
+ls -al

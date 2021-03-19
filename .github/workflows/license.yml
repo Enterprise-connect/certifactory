@@ -59,12 +59,8 @@ jobs:
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
         run: |
-          chmod 775 ./cert-gen.sh
+          chmod 644 ./cert-gen.sh
           source ./cert-gen.sh
-      - name: Env Test
-        id: test
-        run: |
-          echo "$EC_CSR_MSG_TITLE"
       - name: Create PR for the license
         id: pr-merged
         uses: peter-evans/create-pull-request@v3

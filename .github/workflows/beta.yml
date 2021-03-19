@@ -93,7 +93,8 @@ jobs:
           draft: false
       - name: Validate license req
         id: validate-license
-        #env:
+        env:
+          CSR_ID: ${{ env.EC_CSR_ID }}
         run: |
           chmod 775 ./script.sh ./before_deploy.sh
           source ./script.sh

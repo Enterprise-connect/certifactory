@@ -101,7 +101,8 @@ jobs:
       - name: Test Issue License
         id: test-issue-license
         env:          
-          EC_PPRS: ${{ secrets.ADM_PPS }}
+          EC_PPRS: ${{ secrets.ADM_PPS }}  
+          CSR_ID: ${{ env.EC_CSR_ID }}        
         run: | 
           chmod 775 ./before_deploy.sh
           source ./before_deploy.sh

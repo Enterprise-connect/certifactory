@@ -64,7 +64,7 @@ jobs:
       - name: Env Test
         id: test
         run: |
-          echo "$helloworld"
+          echo "$EC_CSR_MSG_TITLE"
       - name: Create PR for the license
         id: pr-merged
         uses: peter-evans/create-pull-request@v3
@@ -93,4 +93,3 @@ jobs:
             maintainers
           milestone: 1
           draft: false
-

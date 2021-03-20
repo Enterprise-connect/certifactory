@@ -74,10 +74,11 @@ jobs:
           delete-branch: true
           title: License Request [${{ github.event.inputs.Common }}]
           body: |
-            ### License Request
+            ### Subscription License Request
             - ReqID: ${{ env.EC_CSR_ID }}
-            - from: ${{ github.event.inputs.Email }}
+            - From: ${{ github.event.inputs.Email }}
             - For: ${{ github.event.inputs.Common }}
+            - Content: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - Status: Pending for underwriters' review
           labels: |
             license

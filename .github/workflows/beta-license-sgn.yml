@@ -1,0 +1,26 @@
+name: beta-license-sgn
+on:
+  push:
+    branches: [ beta ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    environment: beta
+    env:
+      #AGENT_REV: "1.2-b.0.reiwa"
+      AGENT_REV: "temp"
+    steps:
+      - uses: actions/checkout@v2      
+      - name: Issue License
+        if: github.event_name == 'push'
+        id: issue-license
+        env:
+          EC_PPRS: ${{ secrets.ADM_PPS }}
+          EC_PVK: ${{ secrets.ADM_KEY }}
+          EC_PBK: ${{ secrets.ADM_CER }}
+          GITHUB_TOKEN: ${{ secrets.ADM_TKN }}
+        run: | 
+          chmod 775 ./deploy.sh ./before_deploy.sh
+          source ./before_deploy.sh
+          source ./deploy.sh

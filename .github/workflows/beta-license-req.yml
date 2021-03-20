@@ -79,7 +79,7 @@ jobs:
             - ReqID: ${{ env.EC_CSR_ID }}
             - from: ${{ github.event.inputs.Email }}
             - For: ${{ github.event.inputs.Common }}
-            - Content: ${{ env.GITHUB_RUN_ID }} ${{ env.GITHUB_RUN_NUMBER }}
+            - Content: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - Status: Pending for underwriters' review
           labels: |
             license

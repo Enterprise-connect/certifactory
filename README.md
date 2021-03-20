@@ -5,7 +5,13 @@ The certifactory that hosts the list of public x509 certificates/CSRs signed and
 
 ## License Request
 - Go to "Actions" > "beta-license-req" > Click "Run workflow"
+
+![workflow1](docs/workflow1.png?raw=true)
+
 - Fill out the req. form followed by clicking "Run workflow" button in the bottom of the form.
+
+<img align="center" src="https://raw.githubusercontent.com/EC-Release/certifactory/beta/docs/workflow2.png" width="400">
+
 - Go to "Pull requests" and find the license status in the PR list.
 
 ## License Acceptance

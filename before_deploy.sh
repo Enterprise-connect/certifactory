@@ -1,7 +1,13 @@
 #!/bin/bash
-#export CSR_FILE=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
+op=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
+export CSR_ID="${op%.*}"
+printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"
+
 export REQ_EMAIL=$(openssl req -in ./csr-list/$CSR_ID.csr -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
-printf "\n\n********* Requester Email: %s\n\n" "$REQ_EMAIL"
+printf "\n\n**** Req Email: %s\n\n" "$REQ_EMAIL"
+
+# ensure to issue the enclosed license in below dir 
+mkdir -p cert-list/beta
 cd cert-list/beta/
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver

@@ -61,7 +61,7 @@ jobs:
         run: |
           chmod 644 ./cert-gen.sh
           source ./cert-gen.sh
-      - run: echo "$GITHUB_RUN_ID" and "$GITHUB_RUN_NUMBER"
+      - run: echo "$GITHUB_RUN_ID" and "$GITHUB_RUN_NUMBER" and "$GITHUB_ACTION"
       - name: Create PR for the license
         id: pr-license
         uses: peter-evans/create-pull-request@v3

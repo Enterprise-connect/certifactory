@@ -4,7 +4,7 @@ export CSR_ID="${op%.*}"
 printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"
 
 export REQ_EMAIL=$(openssl req -in ./csr-list/$CSR_ID.csr -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
-printf "\n\n********* Requester Email: %s\n\n" "$REQ_EMAIL"
+printf "\n\n**** Req Email: %s\n\n" "$REQ_EMAIL"
 cd cert-list/beta/
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver

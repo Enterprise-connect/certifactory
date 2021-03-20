@@ -74,10 +74,11 @@ jobs:
           delete-branch: true
           title: License Request [${{ github.event.inputs.Common }}]
           body: |
-            License Request-
-            from: ${{ github.event.inputs.Email }}
-            For: ${{ github.event.inputs.Common }}
-            Status: Pending for licensing review
+            ### License Request
+            - ReqID: ${{ env.EC_CSR_ID }}
+            - from: ${{ github.event.inputs.Email }}
+            - For: ${{ github.event.inputs.Common }}
+            - Status: Pending for underwriters' review
           labels: |
             license
             ca

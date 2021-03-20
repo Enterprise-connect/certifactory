@@ -19,7 +19,7 @@ jobs:
           EC_PPRS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
-          GITHUB_TOKEN: ${{ secrets.ADM_TKN }}
+          EC_TKN: ${{ secrets.ADM_TKN }}
         run: | 
           chmod 775 ./deploy.sh ./before_deploy.sh
           source ./before_deploy.sh

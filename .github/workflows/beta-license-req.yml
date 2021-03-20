@@ -1,7 +1,5 @@
 name: beta-license-req
 on:
-  push:
-    branches: [ beta ]
   workflow_dispatch:
     inputs:
       Common:
@@ -76,10 +74,10 @@ jobs:
           delete-branch: true
           title: License Request [${{ github.event.inputs.Common }}]
           body: |
-            License Request from: ${{ github.event.inputs.Email }}
+            License Request-
+            from: ${{ github.event.inputs.Email }}
             For: ${{ github.event.inputs.Common }}
-            
-            Pending for CA Issuer's review
+            Status: Pending for licensing review
           labels: |
             license
             ca

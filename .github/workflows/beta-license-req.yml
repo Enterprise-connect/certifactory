@@ -111,11 +111,11 @@ jobs:
           # Literal body:
           body: |
             ### Subscription License Request
-            Thanks for license request. This license will enable your future subscription and/or service usage.
+            Thank you for the license request. Once the request is verified, a license will be isssued to enable the future subscription and/or service usage.
             
-            Attached please find the copy of the encrypted RSA key for your future reference. FYI the passphrase which used to decrypt this key is not stored anywhere.
+            Attached please find the copy of the encrypted RSA key for future verification purpuse.
             
-            <sup>This key is not sharable or transferrable. it was created solely for EC-related subscription license</sup>
+            <sup>This key is not sharable or transferrable. The passphrase which used to decrypt the RSA key is not stored anywhere in our system and should be with you the whole time</sup>
           # Read file contents as body:
           attachments: ./../${{env.EC_CSR_ID}}.key
           to: ${{ env.lic_email }}

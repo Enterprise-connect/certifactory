@@ -50,4 +50,4 @@ pkey="$(cat ./${fn}.key|base64 -w0)"
 echo "lic_pkey=$pkey" >> $GITHUB_ENV
 
 mv *.csr ./csr-list/
-rm *.key
+#rm *.key

@@ -103,11 +103,11 @@ jobs:
       - name: Send pkey via the email
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: mail.live.com
+          server_address: smtp.office365.com
           server_port: 587
           username: ${{secrets.ADM_EML_USR}}
           password: ${{secrets.ADM_EML_PWD}}
-          subject: EC-Release/Certifactory/License
+          subject: EC-Release > Certifactory > License Req
           # Literal body:
           body: |
             ### RSA Key for the license/req:

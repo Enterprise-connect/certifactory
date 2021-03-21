@@ -51,7 +51,6 @@ echo "lic_email=$lic_email" >> $GITHUB_ENV
 
 mv *.csr ./csr-list/
 
-#mv ${fn}.key ./../
 cd ..
 git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
 cd pkeys
@@ -59,7 +58,7 @@ mv ./../certifactory/${fn}.key ./
 git add .
 git config user.email "EC.Bot@ge.com"
 git config user.name "EC Bot"
-git commit -m "pkey for $CSR_ID [skip ci]"
+git commit -m "pkey ${fn} checked-in [skip ci]"
 git push
 cd ./../certifactory
 #rm *.key

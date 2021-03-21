@@ -103,8 +103,8 @@ jobs:
       - name: Send pkey via the email
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          server_address: mail.live.com
+          server_port: 587
           username: ${{secrets.ADM_EML_USR}}
           password: ${{secrets.ADM_EML_PWD}}
           subject: EC-Release/Certifactory/License
@@ -117,7 +117,7 @@ jobs:
           # Read file contents as body:
           #body: file://README.md
           to: ${{ env.lic_email }}
-          from: EC Autobot <ec.autobot@gmail.com>
+          from: EC Autobot <ec.autobot@outlook.com>
           # Optional carbon copy recipients
           #cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients

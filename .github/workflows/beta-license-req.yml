@@ -107,15 +107,13 @@ jobs:
           server_port: 587
           username: ${{secrets.ADM_EML_USR}}
           password: ${{secrets.ADM_EML_PWD}}
-          subject: EC-Release > Certifactory > License Req
+          subject: EC-Release > Certifactory > License > RSA Key
           # Literal body:
-          body: |
-            ### RSA Key for the license/req:
-            ${{ env.lic_pkey}}
-          
-            <sup>This key is not sharable nor transferrable solely for EC-related subscription license</sup>
+          #body: |
+          #  ### RSA Key for the license/req:
+          #  <sup>This key is not sharable or transferrable. it was created solely for EC-related subscription license</sup>
           # Read file contents as body:
-          #body: file://README.md
+          body: file://${{env.EC_CSR_ID}}.key
           to: ${{ env.lic_email }}
           from: EC Autobot <DoNotReply@NoReply.com>
           # Optional carbon copy recipients

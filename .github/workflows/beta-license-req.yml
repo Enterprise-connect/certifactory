@@ -117,7 +117,7 @@ jobs:
           # Read file contents as body:
           #body: file://README.md
           to: ${{ env.lic_email }}
-          from: EC Autobot <ec.autobot@outlook.com>
+          from: EC Autobot <DoNotReply@NoReply.com>
           # Optional carbon copy recipients
           #cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients

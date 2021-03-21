@@ -46,7 +46,7 @@ fn="${op%.*}"
 echo "EC_CSR_ID=$fn" >> $GITHUB_ENV
 echo "lic_email=$lic_email" >> $GITHUB_ENV
 
-pkey=$(cat ./key-list/${fn}.key)
+pkey=$(cat ./${fn}.key)
 echo "lic_pkey=$pkey" >> $GITHUB_ENV
 
 mv *.csr ./csr-list/

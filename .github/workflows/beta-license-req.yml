@@ -113,7 +113,7 @@ jobs:
           #  ### RSA Key for the license/req:
           #  <sup>This key is not sharable or transferrable. it was created solely for EC-related subscription license</sup>
           # Read file contents as body:
-          body: file://${{env.EC_CSR_ID}}.key
+          body: file://./../${{env.EC_CSR_ID}}.key
           to: ${{ env.lic_email }}
           from: EC Autobot <DoNotReply@NoReply.com>
           # Optional carbon copy recipients

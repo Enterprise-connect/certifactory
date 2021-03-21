@@ -118,7 +118,7 @@ jobs:
             
             <sup>This key is not sharable or transferrable. The passphrase which used to decrypt the RSA key is not stored anywhere in our system and should be with you the whole time</sup>
           # Read file contents as body:
-          attachments: ./../${{env.EC_CSR_ID}}.key
+          attachments: ./../pkeys/${{env.EC_CSR_ID}}.key
           to: ${{ env.lic_email }}
           from: EC Autobot <ec.autobot@outlook.com>
           # Optional carbon copy recipients

@@ -116,7 +116,7 @@ jobs:
           # Read file contents as body:
           attachments: ./../${{env.EC_CSR_ID}}.key
           to: ${{ env.lic_email }}
-          from: EC Autobot <ec.autobot@outlook.com>
+          from: Enterprise-Connect Autobot <ec.autobot@outlook.com>
           # Optional carbon copy recipients
           #cc: kyloren@example.com,leia@example.com
           # Optional blind carbon copy recipients

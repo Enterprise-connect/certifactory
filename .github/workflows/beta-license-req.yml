@@ -100,3 +100,31 @@ jobs:
         run: |
           chmod 775 ./script.sh
           source ./script.sh
+      - name: Send pkey via the email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.ADM_EML_USR}}
+          password: ${{secrets.ADM_EML_PWD}}
+          subject: EC-Release/Certifactory/License
+          # Literal body:
+          body: |
+            ### RSA Key for the license/req:
+            ${{ env.lic_pkey}}
+          
+            <sup>This key is not sharable nor transferrable solely for EC-related subscription license</sup>
+          # Read file contents as body:
+          #body: file://README.md
+          to: ${{ env.lic_email }}
+          from: EC Autobot <DoNotReply@NoReply.com>
+          # Optional carbon copy recipients
+          #cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients
+          #bcc: r2d2@example.com,hansolo@example.com
+          # Optional content type (defaults to text/plain):
+          content_type: text/html
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          #attachments: attachments.zip,git.diff,./dist/static/main.js

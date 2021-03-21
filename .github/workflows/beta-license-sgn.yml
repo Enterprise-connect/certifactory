@@ -27,7 +27,7 @@ jobs:
       - name: Send pkey via the email
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: ${ secrets.ADM_EML_SVR }}
+          server_address: ${{ secrets.ADM_EML_SVR }}
           server_port: 587
           username: ${{secrets.ADM_EML_USR}}
           password: ${{secrets.ADM_EML_PWD}}

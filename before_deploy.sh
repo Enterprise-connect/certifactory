@@ -1,7 +1,5 @@
 #!/bin/bash
-git log -10
-
-git log -1 --name-only csr-list/
+git log -10 csr-list/
 
 ref=$(git log -1 --name-only csr-list/ | tail -n 1)
 op=$(printf "%s" "${ref#*/}")

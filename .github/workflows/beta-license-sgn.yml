@@ -2,6 +2,8 @@ name: beta-license-sgn
 on:
   push:
     branches: [ beta ]
+    paths:
+      - 'csr-list/**'
 jobs:
   build:
     runs-on: ubuntu-latest

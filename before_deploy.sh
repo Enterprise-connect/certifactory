@@ -1,7 +1,6 @@
 #!/bin/bash
-#op=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
-#op=$(git log -1 --pretty=%B csr-list)
-op=$(ls -1t csr-list/ | head -1)
+ref=$(git log -1 --name-only csr-list/ | tail -n 1)
+op=$(printf "%s" "${ref#*/}")
 export CSR_ID="${op%.*}"
 printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"
 

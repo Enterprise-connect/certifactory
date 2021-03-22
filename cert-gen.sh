@@ -44,6 +44,21 @@ echo "EC_CSR_MSG_TITLE=$op" >> $GITHUB_ENV
 
 fn="${op%.*}"
 echo "EC_CSR_ID=$fn" >> $GITHUB_ENV
+echo "lic_email=$lic_email" >> $GITHUB_ENV
+
+#pkey="$(cat ./${fn}.key|base64 -w0)"
+#echo "lic_pkey=$pkey" >> $GITHUB_ENV
 
 mv *.csr ./csr-list/
-mv *.key ./key-list/
+
+cd ..
+git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
+cd pkeys
+mv ./../certifactory/${fn}.key ./
+git add .
+git config user.email "EC.Bot@ge.com"
+git config user.name "EC Bot"
+git commit -m "pkey ${fn} checked-in [skip ci]"
+git push
+cd ./../certifactory
+#rm *.key

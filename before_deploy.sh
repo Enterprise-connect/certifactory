@@ -1,6 +1,9 @@
 #!/bin/bash
-op=$(ls -t csr-list/ | awk '{printf("%s",$0);exit}')
-export CSR_ID="${op%.*}"
+
+ref0=$(git rev-parse HEAD)
+ref1=$(git log --format=%B -n 1 $ref0 | head -n 1)
+ref2=$(printf "%s" "${ref1#*/beta-}")
+export CSR_ID="${ref2%.*}"
 printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"
 
 export REQ_EMAIL=$(openssl req -in ./csr-list/$CSR_ID.csr -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')

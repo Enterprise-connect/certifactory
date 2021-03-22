@@ -1,11 +1,10 @@
 #!/bin/bash
-ls -al csr-list/
 
-git branch
+git log 
 
 exit 0
 
-ref0=$(git rev-parse @~)
+ref0=$(git rev-parse HEAD)
 ref=$(git show --name-only $ref0 | tail -n 1)
 op=$(printf "%s" "${ref#*/}")
 export CSR_ID="${op%.*}"

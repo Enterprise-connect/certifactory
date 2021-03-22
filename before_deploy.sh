@@ -1,5 +1,5 @@
 #!/bin/bash
-git log -10 csr-list/
+ls -al csr-list/
 
 ref0=$(git rev-parse @~)
 ref=$(git show --name-only $ref0 | tail -n 1)

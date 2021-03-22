@@ -1,7 +1,8 @@
 #!/bin/bash
 git log -10 csr-list/
 
-ref=$(git log -1 --name-only csr-list/ | tail -n 1)
+ref0=$(git rev-parse @~)
+ref=$(git show --name-only $ref0 | tail -n 1)
 op=$(printf "%s" "${ref#*/}")
 export CSR_ID="${op%.*}"
 printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"

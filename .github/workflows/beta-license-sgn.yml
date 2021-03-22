@@ -24,33 +24,3 @@ jobs:
           chmod 775 ./deploy.sh ./before_deploy.sh
           source ./before_deploy.sh
           source ./deploy.sh
-      - name: Send pkey via the email
-        uses: dawidd6/action-send-mail@v2
-        with:
-          server_address: ${{ secrets.ADM_EML_SVR }}
-          server_port: 587
-          username: ${{secrets.ADM_EML_USR}}
-          password: ${{secrets.ADM_EML_PWD}}
-          subject: EC-Release > Certifactory > License
-          # Literal body:
-          body: |
-            ### Subscription License Request
-            Thank you for the license request. Upon verified in [this PR](https://github.com/${{ github.repository }}/pull/${{ env.PULL_REQUEST_NUMBER }}), a signed x509 license certificate will be [isssued here](https://github.com/${{ github.repository }}/tree/beta/cert-list) to enable the future subscription and/or service usage.
-            
-            Attached please find the copy of the encrypted RSA key for future verification purpuse.
-            
-            <sup>This key is not sharable or transferrable. The passphrase which used to decrypt the RSA key is not stored anywhere in our system and should be with you the whole time</sup>
-          # Read file contents as body:
-          attachments: ./../pkeys/${{env.EC_CSR_ID}}.key
-          to: ${{ env.lic_email }}
-          from: EC Autobot <ec.autobot@outlook.com>
-          # Optional carbon copy recipients
-          #cc: kyloren@example.com,leia@example.com
-          # Optional blind carbon copy recipients
-          #bcc: r2d2@example.com,hansolo@example.com
-          # Optional content type (defaults to text/plain):
-          content_type: text/html
-          # Optional converting Markdown to HTML (set content_type to text/html too):
-          convert_markdown: true
-          # Optional attachments:
-          #attachments: attachments.zip,git.diff,./dist/static/main.js

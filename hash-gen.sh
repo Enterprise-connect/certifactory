@@ -24,11 +24,12 @@ EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 EC_PPS=$(agent -hsh -smp -dbg)
 
 cr_dir=$(find . -name "${lic_id}.cer")
-printf "\n\n***** cr_dir: %s\n" "$cr_dir"
 if [ ! -z "$cr_dir" ]; then
   export LIC_PBK=$(cat ${cr_dir}|base64 -w0)
+  printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
+  
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${lic_id}.cer | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
-
+  
   printf "\n\n***** CSR_ID: %s\n" "$CSR_ID"
   # verify if the pk exists
   cd ./../
@@ -40,7 +41,6 @@ if [ ! -z "$cr_dir" ]; then
 fi
 
 printf "\n\n***** LIC_PVK: %s\n" "$LIC_PVK"
-printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
 
 if [[ -z "${LIC_PVK}" || -z "${LIC_PBK}" ]]; then
   printf "\n\n**** keypair is invalid. Exiting the workflow.\n"

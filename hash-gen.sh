@@ -24,6 +24,7 @@ EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 EC_PPS=$(agent -hsh -smp -dbg)
 
 cr_dir=$(find . -name "${lic_id}.cer")
+printf "\n\n***** cr_dir: %s\n" "$cr_dir"
 if [ ! -z "$cr_dir" ]; then
   export LIC_PBK=$(cat ${cr_dir}|base64 -w0)
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${lic_id}.cer | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')

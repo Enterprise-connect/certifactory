@@ -45,7 +45,7 @@ jobs:
             
             ${{env.ownerHash}}
             
-            The hash is only valid for 90 days. As the owner of this license, you may continue comeback anytime to renew this hash through the workflow process.
+            The hash is only valid for 90 days. As the owner of this license, you may continue come back at anytime to renew this hash via the workflow process.
             
             <sup>This hash is not sharable or transferrable, and not being stored anywhere in our system.</sup>
           # Read file contents as body:

@@ -51,8 +51,8 @@ if [[ -z "$LIC_PVK" ]] || [[ -z "$LIC_PBK" ]]; then
 fi
 
 
-printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
-# if it does exist
+agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp
+
 EC_PPS=$(agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 

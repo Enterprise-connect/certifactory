@@ -35,4 +35,7 @@ ca.cer
 MSG
 rm ca.key ca.cer
 ls -al ./ && ls -al ./../..
+
+ref3=$(ls -Art | tail -n 1)
+export DEV_ID="${ref3%.*}"
 cd -

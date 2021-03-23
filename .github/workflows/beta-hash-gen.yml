@@ -2,7 +2,7 @@ name: beta-hash-gen
 on:
   workflow_dispatch:
     inputs:
-      DevId:
+      Id:
         description: 'The Id which was assigned originally to the owner of the license'
         required: true
       PPS:
@@ -21,7 +21,7 @@ jobs:
       - name: Generate a owner hash
         id: gen-owner-hash
         env:
-          lic_id: ${{ github.event.inputs.DevId }}
+          lic_id: ${{ github.event.inputs.Id }}
           lic_pps: ${{ github.event.inputs.PPS }}
           EC_PPRS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}

@@ -32,7 +32,7 @@ if [ ! -z "$cr_dir" ]; then
   
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
   
-  printf "\n\n***** CSR_ID: %s\n" "$CSR_ID"
+  #printf "\n\n***** CSR_ID: %s\n" "$CSR_ID"
   # verify if the pk exists
   cd ./../
   git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
@@ -50,6 +50,8 @@ if [[ -z "$LIC_PVK" ]] || [[ -z "$LIC_PBK" ]]; then
   exit -1
 fi
 
+
+printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
 # if it does exist
 EC_PPS=$(agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")

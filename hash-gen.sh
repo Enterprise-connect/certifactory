@@ -23,15 +23,17 @@ EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
 EC_PPS=$(agent -hsh -smp -dbg)
 
-# verify if the pk exists
-cd ./../
-git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
-if [ -f "./pkey/${lic_id}.key" ]; then
-  export LIC_PVK=$(cat ./pkey/${lic_id}.key|base64 -w0)  
-fi
-cd -
 if [ -f "./cert-list/${lic_id}.cer" ]; then
-  export LIC_PBK=$(cat ./cert-list/${lic_id}.cer|base64 -w0)  
+  export LIC_PBK=$(cat ./cert-list/${lic_id}.cer|base64 -w0)
+  CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${lic_id}.cer | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
+
+  # verify if the pk exists
+  cd ./../
+  git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
+  if [ -f "./pkey/${CSR_ID}.key" ]; then
+    export LIC_PVK=$(cat ./pkey/${CSR_ID}.key|base64 -w0)  
+  fi
+  cd -
 fi
 
 if [[ -z "${LIC_PVK}" || -z "${LIC_PBK}" ]]; then

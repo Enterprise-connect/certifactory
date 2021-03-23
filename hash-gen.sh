@@ -26,10 +26,9 @@ EC_PPS=$(agent -hsh -smp -dbg)
 cr_dir=$(find . -name "${lic_id}.cer")
 if [ ! -z "$cr_dir" ]; then
   export LIC_PBK=$(cat ${cr_dir}|base64 -w0)
-  printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
   
   #git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
-  printf "\n\n***** cr_dir: %s\n" "$cr_dir"
+  #printf "\n\n***** cr_dir: %s\n" "$cr_dir"
   
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
   
@@ -37,8 +36,9 @@ if [ ! -z "$cr_dir" ]; then
   # verify if the pk exists
   cd ./../
   git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
-  if [ -f "./pkey/${CSR_ID}.key" ]; then
-    export LIC_PVK=$(cat ./pkey/${CSR_ID}.key|base64 -w0)  
+  cs_dir=$(find . -name "${CSR_ID}.key")
+  if [ ! -z "$cs_dir" ]; then
+    export LIC_PVK=$(cat ${cs_dir}|base64 -w0)
   fi
   cd -
 fi

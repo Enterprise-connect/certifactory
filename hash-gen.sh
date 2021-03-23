@@ -45,7 +45,7 @@ fi
 
 printf "\n\n***** LIC_PVK: %s\n" "$LIC_PVK"
 
-if [[ -z "${LIC_PVK}" || -z "${LIC_PBK}" ]]; then
+if [[ -z "$LIC_PVK" ]] || [[ -z "$LIC_PBK" ]]; then
   printf "\n\n**** keypair is invalid. Exiting the workflow.\n"
   exit -1
 fi

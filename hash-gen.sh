@@ -23,6 +23,7 @@ EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
 EC_PPS=$(agent -hsh -smp -dbg)
 
+ls -al ./cert-list/${lic_id}.cer
 if [ -f "./cert-list/${lic_id}.cer" ]; then
   export LIC_PBK=$(cat ./cert-list/${lic_id}.cer|base64 -w0)
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${lic_id}.cer | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')

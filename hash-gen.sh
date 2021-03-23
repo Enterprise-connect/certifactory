@@ -34,7 +34,7 @@ if [ -f "./cert-list/${lic_id}.cer" ]; then
   export LIC_PBK=$(cat ./cert-list/${lic_id}.cer|base64 -w0)  
 fi
 
-if [[ -z "${LIC_PVK}" && -z "${LIC_PBK}" ]]; then
+if [[ -z "${LIC_PVK}" || -z "${LIC_PBK}" ]]; then
   printf "\n\n**** keypair is invalid. Exiting the workflow.\n"
   exit -1
 fi

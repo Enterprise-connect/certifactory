@@ -18,6 +18,8 @@ jobs:
       AGENT_REV: "temp"
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Generate a owner hash
         id: gen-owner-hash
         env:

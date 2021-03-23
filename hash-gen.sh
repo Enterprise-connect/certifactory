@@ -28,7 +28,7 @@ if [ ! -z "$cr_dir" ]; then
   export LIC_PBK=$(cat ${cr_dir}|base64 -w0)
   printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
   
-  CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${lic_id}.cer | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
+  CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
   
   printf "\n\n***** CSR_ID: %s\n" "$CSR_ID"
   # verify if the pk exists

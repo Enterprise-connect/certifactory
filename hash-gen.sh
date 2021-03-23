@@ -31,7 +31,7 @@ if [ ! -z "$cr_dir" ]; then
   #git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
   printf "\n\n***** cr_dir: %s\n" "$cr_dir"
   git branch
-  git log -- $cr_dir 
+  git log $cr_dir 
   
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
   

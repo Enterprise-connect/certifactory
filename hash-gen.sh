@@ -29,6 +29,7 @@ if [ ! -z "$cr_dir" ]; then
   printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
   
   #git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}'
+  printf "\n\n***** cr_dir: %s\n" "$cr_dir"
   
   git log -- ${cr_dir} 
   

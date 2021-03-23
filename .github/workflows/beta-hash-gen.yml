@@ -43,7 +43,7 @@ jobs:
             ### Owner Hash Generation
             Upon the request, a copy of the owner's as follows-
             
-            ${{env.ownerHash}}
+            ${{env.LIC_HSH}}
             
             The hash is only valid for 90 days. As the owner of this license, you may continue come back at anytime to renew this hash via the workflow process.
             

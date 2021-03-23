@@ -56,4 +56,6 @@ printf "\n\n***** LIC_PBK: %s\n" "$LIC_PBK"
 EC_PPS=$(agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
+printf "\n\n***** EC_PPS finalised\n"
+
 echo "LIC_HSH=$EC_PPS" >> $GITHUB_ENV

@@ -26,3 +26,31 @@ jobs:
           chmod 775 ./deploy.sh ./before_deploy.sh
           source ./before_deploy.sh
           source ./deploy.sh
+      - name: Send license confirmation email
+        uses: dawidd6/action-send-mail@v2
+        with:
+          server_address: ${{ secrets.ADM_EML_SVR }}
+          server_port: 587
+          username: ${{secrets.ADM_EML_USR}}
+          password: ${{secrets.ADM_EML_PWD}}
+          subject: EC-Release > Certifactory > License > Approval
+          # Literal body:
+          body: |
+            ### License Confirmation
+            
+            Congratulations! your license (Subscription ID ${{ env.DEV_ID }}) has been approved. Attached please find a copy of your license certificate for future reference.
+       
+          # Read file contents as body:
+          attachments: ./../license.cer
+          to: ${{ env.lic_email }}
+          from: EC Autobot <ec.autobot@outlook.com>
+          # Optional carbon copy recipients
+          #cc: kyloren@example.com,leia@example.com
+          # Optional blind carbon copy recipients
+          #bcc: r2d2@example.com,hansolo@example.com
+          # Optional content type (defaults to text/plain):
+          content_type: text/html
+          # Optional converting Markdown to HTML (set content_type to text/html too):
+          convert_markdown: true
+          # Optional attachments:
+          #attachments: attachments.zip,git.diff,./dist/static/main.js 

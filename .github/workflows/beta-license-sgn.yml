@@ -18,9 +18,9 @@ jobs:
         if: github.event_name == 'push'
         id: issue-license
         env:
-          EC_PPRS: ${{ secrets.ADM_PPS }}
-          EC_PVK: ${{ secrets.ADM_KEY }}
-          EC_PBK: ${{ secrets.ADM_CER }}
+          EC_PPRS: ${{ secrets.CA_PPS }}
+          EC_PVK: ${{ secrets.CA_KEY }}
+          EC_PBK: ${{ secrets.CA_CER }}
           #EC_TKN: ${{ secrets.ADM_TKN }}
         run: | 
           chmod 775 ./deploy.sh ./before_deploy.sh

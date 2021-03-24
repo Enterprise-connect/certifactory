@@ -50,8 +50,6 @@ if [[ -z "$LIC_PVK" ]] || [[ -z "$LIC_PBK" ]]; then
   exit -1
 fi
 
-agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp
-
 EC_PPS=$(agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 

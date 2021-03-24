@@ -8,6 +8,7 @@ printf "\n\n**** CSR_ID: %s\n\n" "$CSR_ID"
 
 export REQ_EMAIL=$(openssl req -in ./csr-list/$CSR_ID.csr -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
 printf "\n\n**** Req Email: %s\n\n" "$REQ_EMAIL"
+echo "lic_email=$REQ_EMAIL" >> $GITHUB_ENV
 
 # ensure to issue the enclosed license in below dir 
 mkdir -p cert-list/beta
@@ -33,6 +34,13 @@ Seat_x1
 no 
 ca.cer
 MSG
+
 rm ca.key ca.cer
+
+ref7=$(ls -Art | tail -n 1)
+export DEV_ID="${ref7%.*}"
+echo "DEV_ID=$DEV_ID" >> $GITHUB_ENV
+cp $ref7 ./../../../license.cer
+
 ls -al ./ && ls -al ./../..
 cd -

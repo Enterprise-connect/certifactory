@@ -40,7 +40,7 @@ rm ca.key ca.cer
 ref7=$(ls -Art | tail -n 1)
 export DEV_ID="${ref7%.*}"
 echo "DEV_ID=$DEV_ID" >> $GITHUB_ENV
-cp $ref7 ./../../../license.cer
+cp $ref7 ./../../../license.txt
 
 ls -al ./ && ls -al ./../..
 cd -

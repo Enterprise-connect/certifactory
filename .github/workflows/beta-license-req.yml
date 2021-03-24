@@ -60,8 +60,8 @@ jobs:
           EC_PBK: ${{ secrets.ADM_CER }}
           EC_TKN: ${{ secrets.ADM_TKN }}
         run: |
-          chmod 644 ./cert-gen.sh
-          source ./cert-gen.sh
+          chmod 644 ./csr-gen.sh
+          source ./csr-gen.sh
       - name: Create PR for the license
         id: pr-license
         uses: peter-evans/create-pull-request@v3

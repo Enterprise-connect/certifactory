@@ -1,9 +1,13 @@
-name: beta-license-sgn
+name: beta-hash-gen
 on:
-  push:
-    branches: [ beta ]
-    paths:
-      - 'csr-list/**'
+  workflow_dispatch:
+    inputs:
+      Id:
+        description: 'The Id which was assigned originally to the owner of the license'
+        required: true
+      PPS:
+        description: 'The passphrase used for this license'
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,35 +17,38 @@ jobs:
       #AGENT_REV: "1.2-b.0.reiwa"
       AGENT_REV: "temp"
     steps:
-      - uses: actions/checkout@v2      
-      - name: Issue License
-        if: github.event_name == 'push'
-        id: issue-license
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Generate a owner hash
+        id: gen-owner-hash
         env:
+          lic_id: ${{ github.event.inputs.Id }}
+          lic_pps: ${{ github.event.inputs.PPS }}
           EC_PPRS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
-          #EC_TKN: ${{ secrets.ADM_TKN }}
-        run: | 
-          chmod 775 ./deploy.sh ./before_deploy.sh
-          source ./before_deploy.sh
-          source ./deploy.sh
-      - name: Send license confirmation email
+          EC_TKN: ${{ secrets.ADM_TKN }}
+        run: |
+          chmod 644 ./hash-gen.sh
+          source ./hash-gen.sh
+      - name: Send hash via email
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: ${{ secrets.ADM_EML_SVR }}
           server_port: 587
           username: ${{secrets.ADM_EML_USR}}
           password: ${{secrets.ADM_EML_PWD}}
-          subject: EC-Release > Certifactory > License > Approval
+          subject: EC-Release > Certifactory > License > Hash
           # Literal body:
           body: |
-            ### License Confirmation
+            ### Owner Hash Generation
+            Attached please find the owner hash as request.
+          
+            The hash is only valid for 90 days. As the owner of this license, you may continue come back at anytime to renew this hash via the workflow process.
             
-            Congratulations! your license (Subscription ID ${{ env.DEV_ID }}) has been approved. Attached please find a copy of your license certificate for future reference.
-       
+            <sup>This hash is not sharable or transferrable, and not being stored anywhere in our system.</sup>
           # Read file contents as body:
-          attachments: ./../license.txt
           to: ${{ env.lic_email }}
           from: EC Autobot <ec.autobot@outlook.com>
           # Optional carbon copy recipients
@@ -53,4 +60,4 @@ jobs:
           # Optional converting Markdown to HTML (set content_type to text/html too):
           convert_markdown: true
           # Optional attachments:
-          #attachments: attachments.zip,git.diff,./dist/static/main.js 
+          attachments: ./hash.txt

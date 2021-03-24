@@ -31,8 +31,10 @@ if [ ! -z "$cr_dir" ]; then
   #printf "\n\n***** cr_dir: %s\n" "$cr_dir"
   
   CSR_ID=$(git log --pretty=oneline --abbrev-commit -- ${cr_dir} | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
-  
-  #printf "\n\n***** CSR_ID: %s\n" "$CSR_ID"
+  export REQ_EMAIL=$(openssl req -in ./csr-list/$CSR_ID.csr -noout -text | grep -Po '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)')
+  printf "\n\n**** Req Email: %s\n\n" "$REQ_EMAIL"
+
+
   # verify if the pk exists
   cd ./../
   git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git
@@ -43,19 +45,15 @@ if [ ! -z "$cr_dir" ]; then
   cd -
 fi
 
-printf "\n\n***** LIC_PVK: %s\n" "$LIC_PVK"
-
 if [[ -z "$LIC_PVK" ]] || [[ -z "$LIC_PBK" ]]; then
   printf "\n\n**** keypair is invalid. Exiting the workflow.\n"
   exit -1
 fi
-
 
 agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp
 
 EC_PPS=$(agent -hsh -pvk "$LIC_PVK" -pbk "$LIC_PBK" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
-printf "\n\n***** EC_PPS finalised\n"
-
-echo "LIC_HSH=$EC_PPS" >> $GITHUB_ENV
+echo $EC_PPS > ./hash.txt
+echo "lic_email=$REQ_EMAIL" >> $GITHUB_ENV

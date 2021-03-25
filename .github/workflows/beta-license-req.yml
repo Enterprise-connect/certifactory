@@ -112,7 +112,7 @@ jobs:
           # Literal body:
           body: |
             ### Subscription License Request
-            Thank you for [requesting the license](https://github.com/${{ github.repository }}/pull/${{ env.PULL_REQUEST_NUMBER }}), we will review it shortly.
+            Thank you for [requesting the license](https://github.com/${{ github.repository }}/pull/${{ env.PULL_REQUEST_NUMBER }}) and we will review it shortly.
             
             Attached please find the copy of the encrypted RSA key for future verification purpuse.
             

@@ -39,7 +39,6 @@ jobs:
           # Literal body:
           body: |
             ### License Confirmation
-            
             Congratulations! your license (Subscription ID ${{ env.DEV_ID }}) has been approved. Attached please find the license certificate for future reference. A copy of the license is also available to [download here](https://github.com/${{ github.repository }}/tree/disty/cert-list/beta). Please conact ec-research@ge.com if you have any questions.
       
       

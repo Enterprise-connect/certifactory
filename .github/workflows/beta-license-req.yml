@@ -112,7 +112,7 @@ jobs:
           # Literal body:
           body: |
             ### Subscription License Request
-            Thank you for the license request. Upon verified in [this PR](https://github.com/${{ github.repository }}/pull/${{ env.PULL_REQUEST_NUMBER }}), a signed x509 license certificate will be [isssued here](https://github.com/${{ github.repository }}/tree/beta/cert-list) to enable the future subscription and/or service usage.
+            Thank you for the [license request](https://github.com/${{ github.repository }}/pull/${{ env.PULL_REQUEST_NUMBER }}). We review it shortly.
             
             Attached please find the copy of the encrypted RSA key for future verification purpuse.
             

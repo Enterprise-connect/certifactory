@@ -14,6 +14,8 @@ jobs:
       AGENT_REV: "temp"
     steps:
       - uses: actions/checkout@v2   
+        with:
+          fetch-depth: 0
       - name: Issue License
         if: github.event_name == 'push'
         id: issue-license

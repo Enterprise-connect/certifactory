@@ -40,8 +40,12 @@ jobs:
           body: |
             ### License Confirmation
             
-            Congratulations! your license (Subscription ID ${{ env.DEV_ID }}) has been approved. Attached please find a copy of your license certificate for future reference.
-       
+            Congratulations! your license (Subscription ID ${{ env.DEV_ID }}) has been approved. Attached please find the license certificate for future reference. A copy of the license is also available to [download here](https://github.com/${{ github.repository }}/tree/disty/cert-list/beta). Please conact ec-research@ge.com if you have any questions.
+      
+      
+            Thank you,
+            
+            Enterprise-Connect, the product team.
           # Read file contents as body:
           attachments: ./../license.txt
           to: ${{ env.lic_email }}

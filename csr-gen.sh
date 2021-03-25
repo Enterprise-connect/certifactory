@@ -59,6 +59,6 @@ git add .
 git config user.email "EC.Bot@ge.com"
 git config user.name "EC Bot"
 git commit -m "pkey ${fn} checked-in [skip ci]"
-git push -f
+git push
 cd ./../certifactory
 #rm *.key

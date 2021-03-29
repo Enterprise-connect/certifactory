@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Issue License
-        if: github.event_name == 'push'
+        #if: github.event_name == 'push'
         id: issue-license
         env:
           EC_PPRS: ${{ secrets.ADM_PPS }}

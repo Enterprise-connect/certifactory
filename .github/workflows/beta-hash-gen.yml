@@ -24,15 +24,16 @@ jobs:
       - name: Generate a owner hash
         id: gen-owner-hash
         env:
-          lic_id: ${{ github.event.inputs.Id }}
-          lic_pps: ${{ github.event.inputs.PPS }}
           EC_PPRS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
           EC_TKN: ${{ secrets.ADM_TKN }}
         run: |
+          export lic_pps=$(cat $GITHUB_EVENT_PATH | jq '.inputs.PPS' | sed 's/"//g' )
+          export lic_id=$(cat $GITHUB_EVENT_PATH | jq '.inputs.Id' | sed 's/"//g' )
           chmod 644 ./hash-gen.sh
           source ./hash-gen.sh
+        #  source ./hash-gen.sh
       - name: Send hash via email
         uses: dawidd6/action-send-mail@v2
         with:

@@ -51,15 +51,15 @@ jobs:
           lic_organization: Enterprise-Connect
           lic_unit: Licensing
           lic_dns: ${{ github.event.inputs.DNS }}
-          lic_email: ${{ github.event.inputs.Email }}
           lic_cer_alg: SHA256WithRSA
-          lic_key_alg: 2048
-          lic_pps: ${{ github.event.inputs.PPS }}
+          lic_key_alg: 2048          
           EC_PPRS: ${{ secrets.ADM_PPS }}
           EC_PVK: ${{ secrets.ADM_KEY }}
           EC_PBK: ${{ secrets.ADM_CER }}
           EC_TKN: ${{ secrets.ADM_TKN }}
         run: |
+          export lic_pps=$(cat $GITHUB_EVENT_PATH | jq '.inputs.PPS' | sed 's/"//g' )
+          export lic_email=$(cat $GITHUB_EVENT_PATH | jq '.inputs.Email' | sed 's/"//g' )
           chmod 644 ./csr-gen.sh
           source ./csr-gen.sh
       - name: Create PR for the license
@@ -68,8 +68,8 @@ jobs:
         with:
           token: ${{ secrets.ADM_TKN }}
           commit-message: ${{ env.EC_CSR_MSG_TITLE }}
-          committer: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
-          author: ${{ github.event.inputs.Common }} <${{ github.event.inputs.Email }}>
+          committer: ${{ github.event.inputs.Common }} <${{ env.lic_email }}>
+          author: ${{ github.event.inputs.Common }} <${{ env.lic_email }}>
           signoff: false
           branch: beta-${{ env.EC_CSR_MSG_TITLE }}
           delete-branch: true
@@ -77,7 +77,7 @@ jobs:
           body: |
             ### Subscription License Request
             - ReqID: ${{ env.EC_CSR_ID }}
-            - From: ${{ github.event.inputs.Email }}
+            - From: ${{ env.lic_email }}
             - For: ${{ github.event.inputs.Common }}
             - Content: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             - Status: Pending for underwriters' review

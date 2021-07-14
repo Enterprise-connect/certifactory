@@ -18,10 +18,14 @@ if [[ ! -z "${EC_PPRS}" ]]; then
 fi
 
 EC_PPS=$(agent -hsh -smp)
+echo step0
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
+echo step1
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
+echo step2
 
 EC_PPS=$(agent -hsh -smp)
+echo step3
 
 cr_dir=$(find . -name "${lic_id}.cer")
 if [ ! -z "$cr_dir" ]; then

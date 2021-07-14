@@ -17,11 +17,11 @@ if [[ ! -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
 
-EC_PPS=$(agent -hsh -smp -dbg)
+EC_PPS=$(agent -hsh -smp)
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
-EC_PPS=$(agent -hsh -smp -dbg)
+EC_PPS=$(agent -hsh -smp)
 
 cr_dir=$(find . -name "${lic_id}.cer")
 if [ ! -z "$cr_dir" ]; then

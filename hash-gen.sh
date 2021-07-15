@@ -19,7 +19,9 @@ fi
 
 EC_PPS=$(agent -hsh -smp)
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
+echo step1 $EC_PPS
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
+echo step2 $EC_PPS
 
 EC_PPS=$(agent -hsh -smp)
 

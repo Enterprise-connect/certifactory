@@ -35,7 +35,7 @@ jobs:
           source ./hash-gen.sh
         #  source ./hash-gen.sh
       - name: Send hash via email
-        uses: dawidd6/action-send-mail@v2
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.ADM_EML_SVR }}
           server_port: 587

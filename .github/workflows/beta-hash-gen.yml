@@ -51,7 +51,7 @@ jobs:
             
             <sup>This hash is not sharable or transferrable, and not being stored anywhere in our system.</sup>
           # Read file contents as body:
-          to: "::add-mask::$lic_email"
+          to: ${{ env.lic_email }}
           from: EC Autobot <ec.autobot@outlook.com>
           # Optional carbon copy recipients
           #cc: kyloren@example.com,leia@example.com

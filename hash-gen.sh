@@ -18,9 +18,9 @@ if [[ ! -z "${EC_PPRS}" ]]; then
 fi
 
 EC_PPS=$(agent -hsh -smp)
-echo step0
+echo step0 $lic_pps
 EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
-echo step1
+echo step1 $EC_PPS
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 echo step2 $EC_PPS
 

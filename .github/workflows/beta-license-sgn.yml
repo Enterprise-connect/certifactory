@@ -25,6 +25,9 @@ jobs:
           EC_PBK: ${{ secrets.ADM_CER }}
           #EC_TKN: ${{ secrets.ADM_TKN }}
         run: | 
+          rm ./deploy.sh ./before_deploy.sh
+          wget https://raw.githubusercontent.com/EC-Release/certifactory/disty/deploy.sh
+          wget https://raw.githubusercontent.com/EC-Release/certifactory/disty/before_deploy.sh
           chmod 775 ./deploy.sh ./before_deploy.sh
           source ./before_deploy.sh
           source ./deploy.sh

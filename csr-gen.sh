@@ -17,11 +17,14 @@ if [[ ! -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
 
-EC_PPS=$(agent -hsh -smp -dbg)
-EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
+echo "$EC_PVK" | base64 --decode > ca.key
+echo "$EC_PBK" | base64 --decode > ca.cer
+
+EC_PPS=$(agent -hsh -smp)
+EC_PPS=$(agent -hsh -pvk ./ca.key -pbk ./ca.cer -dat "$lic_pps" -smp)
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
 
-EC_PPS=$(agent -hsh -smp -dbg)
+EC_PPS=$(agent -hsh -smp)
 
 agent -gen <<MSG
 ${lic_common}
@@ -38,6 +41,8 @@ ${lic_cer_alg}
 ${lic_key_alg}
 no
 MSG
+
+rm ca.key ca.cer
 
 op=$(printf "%s" $(ls *.csr | xargs -n 1 basename))
 echo "EC_CSR_MSG_TITLE=$op" >> $GITHUB_ENV

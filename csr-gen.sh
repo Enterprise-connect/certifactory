@@ -17,12 +17,17 @@ if [[ ! -z "${EC_PPRS}" ]]; then
   export EC_PPS=$EC_PPRS
 fi
 
-EC_PPS=$(agent -hsh -smp -dbg)
-EC_PPS=$(agent -hsh -pvk "$EC_PVK" -pbk "$EC_PBK" -dat "$lic_pps" -smp)
+EC_PPS=$(agent -hsh -smp)
+
+echo $EC_PVK | base64 --decode > ec.key
+echo $EC_PBK | base64 --decode > ec.cer
+
+EC_PPS=$(agent -hsh -pvk ./ec.key -pbk ./ec.cer -dat "$lic_pps" -smp)
+#echo step0 $EC_PPS
 EC_PPS=$(echo "${EC_PPS##*$'\n'}")
-
-EC_PPS=$(agent -hsh -smp -dbg)
-
+#echo step1 $EC_PPS
+EC_PPS=$(agent -hsh -smp)
+#echo step2 $EC_PPS
 agent -gen <<MSG
 ${lic_common}
 ${lic_country}
@@ -61,4 +66,5 @@ git config user.name "EC Bot"
 git commit -m "pkey ${fn} checked-in [skip ci]"
 git push
 cd ./../certifactory
+tree ./
 #rm *.key

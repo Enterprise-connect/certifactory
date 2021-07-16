@@ -20,6 +20,7 @@ if [ -z "$CSR_ID" ]; then
     exit 1
 fi'
 
+tree ./../
 cd ./../x509
 
 export SN_NUM=$(openssl req -in csr-list/$CSR_ID.csr -noout -text | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
@@ -31,3 +32,5 @@ fi
  
 echo ******** the serialnumber $SN_NUM matches the csrid $CSR_ID 
 openssl req -in csr-list/$CSR_ID.csr -noout -text
+
+cd ./../certifactory

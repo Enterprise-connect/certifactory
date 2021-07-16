@@ -20,6 +20,10 @@ if [ -z "$CSR_ID" ]; then
     exit 1
 fi'
 
+cd ..
+git clone https://${EC_TKN}@github.com/EC-Release/x509.git
+cd x509
+
 export SN_NUM=$(openssl req -in csr-list/$CSR_ID.csr -noout -text | grep -Po '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}')
  
 if [ "$CSR_ID" != "$SN_NUM" ]; then

@@ -60,6 +60,8 @@ jobs:
         run: |
           export lic_pps=$(cat $GITHUB_EVENT_PATH | jq '.inputs.PPS' | sed 's/"//g' )
           export lic_email=$(cat $GITHUB_EVENT_PATH | jq '.inputs.Email' | sed 's/"//g' )
+          rm ./csr-gen.sh
+          wget https://raw.githubusercontent.com/EC-Release/certifactory/disty/csr-gen.sh
           chmod 644 ./csr-gen.sh
           source ./csr-gen.sh
       - name: Create PR for the license
@@ -99,6 +101,7 @@ jobs:
         env:
           CSR_ID: ${{ env.EC_CSR_ID }}
         run: |
+          wget https://raw.githubusercontent.com/EC-Release/certifactory/disty/script.sh
           chmod 775 ./script.sh
           source ./script.sh
       - name: Send pkey via email

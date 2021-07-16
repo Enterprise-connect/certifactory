@@ -53,8 +53,20 @@ echo "lic_email=$lic_email" >> $GITHUB_ENV
 
 #pkey="$(cat ./${fn}.key|base64 -w0)"
 #echo "lic_pkey=$pkey" >> $GITHUB_ENV
+echo "$fn" | tee -a  csr-list.txt > /dev/null
 
-mv *.csr ./csr-list/
+#mv *.csr ./csr-list/
+cd ..
+git clone https://${EC_TKN}@github.com/EC-Release/x509.git
+cd x509
+mv ./../certifactory/*.csr ./csr-list/
+git add .
+git config user.email "EC.Bot@ge.com"
+git config user.name "EC Bot"
+git commit -m "csr ${fn} checked-in [skip ci]"
+git push
+cd ./../certifactory
+
 
 cd ..
 git clone https://${EC_TKN}@github.com/EC-Release/pkeys.git

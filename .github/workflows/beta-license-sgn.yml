@@ -3,7 +3,7 @@ on:
   push:
     branches: [ beta ]
     paths:
-      - 'csr-list/**'
+      - 'crt-list.txt'
 jobs:
   build:
     runs-on: ubuntu-latest

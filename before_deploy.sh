@@ -11,8 +11,8 @@ printf "\n\n**** Req Email: %s\n\n" "$REQ_EMAIL"
 echo "lic_email=$REQ_EMAIL" >> $GITHUB_ENV
 
 # ensure to issue the enclosed license in below dir 
-mkdir -p cert-list/beta
-cd cert-list/beta/
+mkdir -p cert-list/
+cd cert-list/
 
 source <(wget -O - https://raw.githubusercontent.com/EC-Release/sdk/disty/scripts/agt/v1.2beta.linux64.txt) -ver
 
@@ -40,7 +40,7 @@ rm ca.key ca.cer
 ref7=$(ls -Art | tail -n 1)
 export DEV_ID="${ref7%.*}"
 echo "DEV_ID=$DEV_ID" >> $GITHUB_ENV
-cp $ref7 ./../../../license.txt
+cp $ref7 ./../../license.txt
 
-ls -al ./ && ls -al ./../..
+tree ./../..
 cd -
